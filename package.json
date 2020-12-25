@@ -1,0 +1,31 @@
+{
+  "name": "empty-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "start": "parcel src/demo.html",
+    "build-prod": "parcel build src/demo.html"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.30.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crazy-wisdom/form-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crazy-wisdom/form-widget/issues"
+  },
+  "homepage": "https://github.com/crazy-wisdom/form-widget#readme"
+}
