@@ -63,10 +63,13 @@ $sans-serif-font: "Fira Sans", Arial, sans-serif;
   }
 
   .before-input {
+    width: 100%;
     cursor: pointer;
   }
 
   .after-input {
+    width: 100%;
+
     .input-hint {
       color: #515AFC;
       margin: 0;
@@ -97,5 +100,29 @@ $sans-serif-font: "Fira Sans", Arial, sans-serif;
     &:-moz-placeholder { /* Firefox 18- */
       color: #9B9B9B;
     }
+  }
+}
+
+
+.submit-btn {
+  background-color: #F25A38;
+  width: 200px;
+  height: 50px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: $bold;
+  outline: 0;
+  border: 0;
+  margin: 0;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+
+  &.disabled {
+    opacity: 0.3;
   }
 }

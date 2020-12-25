@@ -1,5 +1,42 @@
+import $ from "jquery";
+import Cleave from 'cleave.js';
+
+import FormValidation from "./form-validation";
+
+
 let FormEvent = {};
 (function (context) {
+
+  context.enableNextBtn = function($form) {
+    var $button = $form.find('button.disabled');
+    $button.removeClass('disabled');
+
+    $form.find('.input-wrap').removeClass('error');
+  };
+
+  context.disableNextBtn = function($form) {
+    var $button = $form.find('button');
+    $button.addClass('disabled');
+  };
+
+  context.formatInput = function() {
+    // new Cleave('.after-input .zipcode-input', {
+    //   numericOnly: true,
+    //   blocks: [5],
+    // });
+
+    // new Cleave('.after-input .phone-number-input', {
+    //   numericOnly: true,
+    //   blocks: [0, 3, 0, 3, 4],
+    //   delimiters: ["(", ")", " ", "-"],
+    // });
+
+    new Cleave('.after-input .dob-input', {
+      date: true,
+      delimiter: '/',
+      datePattern: ['m', 'd', 'Y']
+    });
+  }
 
   context.toggleInput = function() {
     var toggleInputWrap = function($element) {
@@ -74,4 +111,143 @@ let FormEvent = {};
     });
   };
 
+
+  context.validate = function($form, error = false) {
+    var showError = function($element) {
+      if ($element.hasClass('input-wrap')) {
+        $element.addClass('error');
+      } else {
+        $element.closest('.input-wrap').addClass('error');
+      }
+    };
+
+    var validateInputList = function($form) {
+      var $inputList = $form.find('input:visible');
+
+      if ($inputList.length === 0) {
+        return true;
+      }
+
+      var count = 0;
+
+      $.each($inputList, function(index, $input) {
+        $input = $($input);
+        var inputVal = $.trim($input.val());
+        if (inputVal === '') {
+          count += 1;
+          if (error) {
+            showError($input);
+          }
+          return false;
+        }
+
+        if ($input.hasClass('email-input')) {
+          if (!FormValidation.isEmail(inputVal)) {
+            count += 1;
+            if (error) {
+              showError($input);
+            }
+            return false;
+          }
+        }
+
+        if ($input.hasClass('phone-number-input')) {
+          if (!FormValidation.isPhone(inputVal)) {
+            count += 1;
+            if (error) {
+              showError($input);
+            }
+            return false;
+          }
+        }
+
+        if ($input.hasClass('zipcode-input')) {
+          if (!FormValidation.isZip(inputVal)) {
+            count += 1;
+            if (error) {
+              showError($input);
+            }
+            return false;
+          }
+        }
+
+        if ($input.hasClass('dob-input')) {
+          if (inputVal.length !== 10) {
+            count += 1;
+
+            if (error) {
+              showError($input);
+            }
+            return false;
+          }
+        }
+      });
+
+      // Make sure all of input have value.
+      return count === 0;
+    };
+
+    var validateMultipleChoices = function($form) {
+      var $choices = $form.find('.choice.multiple');
+
+      if ($choices.length === 0) {
+        return true;
+      }
+
+      var count = 0;
+      $.each($choices, function(index, $choice) {
+        $choice = $($choice);
+
+        if (!$choice.is(':hidden') && $choice.find('.checkbox').hasClass('active')) {
+          count += 1;
+          return false;
+        }
+      });
+
+      // Make sure multiple choices have one checked at least.
+      return count > 0;
+    };
+
+    var validateCheckboxList = function($form) {
+      var $inputWrapList = $form.find('.input-wrap');
+      var count = 0;
+
+      $.each($inputWrapList, function(index, $inputWrap) {
+        $inputWrap = $($inputWrap);
+        var $checkboxList = $inputWrap.find('.checkbox:visible');
+        if ($checkboxList.length > 0 && !$checkboxList.hasClass('active')) {
+          count += 1;
+          if (error) {
+            showError($inputWrap);
+          }
+
+          return false;
+        }
+      });
+
+      return count === 0;
+    };
+
+    return validateInputList($form) && validateMultipleChoices($form) && validateCheckboxList($form);
+  };
+
+  context.changeFormStatus = function($form) {
+    if (context.validate($form)) {
+      context.enableNextBtn($form);
+    } else {
+      context.disableNextBtn($form);
+    }
+  };
+
 })(FormEvent);
+
+
+$(document).ready(function () {
+  FormEvent.toggleInput();
+  FormEvent.formatInput();
+
+  $('.example-list').on('keyup blur change click', function () {
+    var $form = $(this);
+    FormEvent.changeFormStatus($form);
+  });
+});

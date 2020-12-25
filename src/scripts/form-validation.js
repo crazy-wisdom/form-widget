@@ -16,4 +16,17 @@ let FormValidation = {};
     return re.test(zipcode);
   };
 
+  context.isDOB = function(val) {
+    if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(val) &&
+      !/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(val)
+    ) {
+      return false;
+    }
+    var dateVal = new Date(val);
+
+    return dateVal < new Date();
+  };
+
 })(FormValidation);
+
+export default FormValidation;
