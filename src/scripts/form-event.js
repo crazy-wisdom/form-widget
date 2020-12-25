@@ -25,11 +25,11 @@ let FormEvent = {};
     //   blocks: [5],
     // });
 
-    // new Cleave('.after-input .phone-number-input', {
-    //   numericOnly: true,
-    //   blocks: [0, 3, 0, 3, 4],
-    //   delimiters: ["(", ")", " ", "-"],
-    // });
+    new Cleave('.after-input .phone-number-input', {
+      numericOnly: true,
+      blocks: [0, 3, 0, 3, 4],
+      delimiters: ["(", ")", " ", "-"],
+    });
 
     new Cleave('.after-input .dob-input', {
       date: true,
@@ -112,7 +112,7 @@ let FormEvent = {};
   };
 
 
-  context.validate = function($form, error = false) {
+  context.validate = function($form, error=false) {
     var showError = function($element) {
       if ($element.hasClass('input-wrap')) {
         $element.addClass('error');
@@ -249,5 +249,14 @@ $(document).ready(function () {
   $('.example-list').on('keyup blur change click', function () {
     var $form = $(this);
     FormEvent.changeFormStatus($form);
+  });
+
+  $('.example-list').on('click', '.submit-btn', function () {
+    var $form = $(this).closest(".example-list");
+    if (FormEvent.validate($form, true)) {
+      FormEvent.enableNextBtn($form);
+    } else {
+      FormEvent.disableNextBtn($form);
+    }
   });
 });
