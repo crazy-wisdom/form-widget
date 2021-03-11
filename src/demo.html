@@ -7,39 +7,31 @@
     <body>
 
         <div id="app">
-          <div class="example-list d-flex flex-column justify-content-center align-items-center">
-            <div class="input-wrap d-flex flex-column justify-content-center align-items-center">
-              <div class="before-input">
-                <input type="text" placeholder="Email" required="required" />
-              </div>
+          <div class="form d-flex flex-column justify-content-center align-items-center">
+            
+            <div class="error-message"></div>
 
-              <div class="after-input hide">
-                <div class="input-hint">Email</div>
-                <input class="email-input" type="email" name="email" required="required" data-name="email" />
+            <div class="input-wrap d-flex flex-column justify-content-center align-items-center">
+
+              <div class="after-input">
+                <div class="input-hint hide">Email</div>
+                <input class="email-input" type="email" placeholder="Email" name="email" data-name="email" data-error="Email is invalid." />
               </div>
             </div>
 
 
             <div class="input-wrap d-flex flex-column justify-content-center align-items-center">
-              <div class="before-input">
-                <input type="text" placeholder="Phone" required="required" />
-              </div>
-
-              <div class="after-input hide">
-                <div class="input-hint">Phone</div>
-                <input class="phone-number-input" type="text" name="phone" required="required" data-name="phone" />
+              <div class="after-input">
+                <div class="input-hint hide">Phone</div>
+                <input class="phone-number-input" type="text" placeholder="Phone" name="phone" data-name="phone" data-error="Phone is invalid." />
               </div>
             </div>
 
 
             <div class="input-wrap d-flex flex-column justify-content-center align-items-center">
-              <div class="before-input">
-                <input type="text" placeholder="Date of Birth" required="required" />
-              </div>
-
-              <div class="after-input hide">
-                <div class="input-hint">Date of Birth</div>
-                <input class="dob-input" type="text" name="dob" required="required" data-name="dob" />
+              <div class="after-input">
+                <div class="input-hint hide">Date of Birth</div>
+                <input class="dob-input" type="text" placeholder="Date of birth" name="dob" data-name="dob" data-error="Date of birth is invalid." />
               </div>
             </div>
 

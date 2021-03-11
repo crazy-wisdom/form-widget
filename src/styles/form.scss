@@ -30,10 +30,10 @@ $sans-serif-font: "Fira Sans", Arial, sans-serif;
   border: 0;
   border-bottom: 1px solid #dedede;
   margin-bottom: 25px;
-  padding: 0 20px 0 20px;
+  padding: 0 15px 0 15px;
 
   &.active {
-    border: 1px solid #515AFC;
+    // border: 1px solid #515AFC;
 
     .input-hint {
       color: #515AFC
@@ -62,10 +62,6 @@ $sans-serif-font: "Fira Sans", Arial, sans-serif;
     margin: 0 20px 0 20px;
   }
 
-  .before-input {
-    width: 100%;
-    cursor: pointer;
-  }
 
   .after-input {
     width: 100%;
@@ -101,6 +97,12 @@ $sans-serif-font: "Fira Sans", Arial, sans-serif;
       color: #9B9B9B;
     }
   }
+}
+
+.error-message {
+  font-size: 14px;
+  line-height: 32px;
+  color: red;
 }
 
 
