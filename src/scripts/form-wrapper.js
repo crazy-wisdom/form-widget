@@ -127,10 +127,10 @@ jquery.fn.extend({
   },
 
   handleEnterKey: function() {
-    var $form = this;
+    var $submitBtn = this;
     $(document).on('keypress', function (e) {
       if (e.which === 13) {
-        $form.handleSubmit();
+        $submitBtn.trigger('click');
       }
     });
   }

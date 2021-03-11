@@ -19,6 +19,6 @@ $(function() {
   var $form = $('.form:visible');
 
   $form.handleInput();
-  $form.handleEnterKey();
+  $form.find('.submit-btn').handleEnterKey();
   $form.handleSubmit();
 });
