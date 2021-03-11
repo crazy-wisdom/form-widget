@@ -3,6 +3,7 @@ import Cleave from 'cleave.js';
 
 var jquery = $;
 
+require('./lib/jquery.inputmask.min.js');
 
 jquery.extend({
   formatInputValue: function() {
@@ -12,11 +13,7 @@ jquery.extend({
       delimiters: ["(", ")", " ", "-"],
     });
 
-    new Cleave('.dob-input', {
-      date: true,
-      delimiter: '/',
-      datePattern: ['m', 'd', 'Y']
-    });
+    $('.dob-input').inputmask('99/99/9999');
   },
 
   toggleInputEvents: function() {

@@ -37,7 +37,7 @@ jquery.fn.extend({
   validateDob: function() {
     var result = true;
     this.each(function() {
-      result = formValidation.isDOB($.trim(this.value));
+      result = validation.isDOB($.trim(this.value));
       return result;
     });
 
@@ -115,7 +115,7 @@ jquery.fn.extend({
         }
 
         if ($input.hasClass('dob-input')) {
-          if (inputVal.length !== 10) {
+          if (!$input.validateDob()) {
             count += 1;
 
             if (showMessage) {

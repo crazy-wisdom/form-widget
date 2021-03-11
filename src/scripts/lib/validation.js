@@ -20,9 +20,15 @@ var validation = {
     ) {
       return false;
     }
-    var dateVal = new Date(val);
 
-    return dateVal < new Date();
+    try {
+      var dateVal = new Date(val);
+      return dateVal < new Date();
+
+    } catch (error) {
+      return false;
+    }
+
   }
 };
 

@@ -38,6 +38,10 @@ $(function() {
 
   $('.form').on('click', '.submit-btn', function () {
     var $form = $(this).closest(".form");
-    $form.showValidationStatus();
+    if ($form.validate()) {
+      console.log('yes')
+    } else {
+      console.log('no');
+    }
   });
 });
