@@ -16,32 +16,9 @@ $(function() {
   $.formatInputValue();
   $.toggleInputEvents();
 
-  $('.form').on('blur input', 'input', function() {
-    var $form = $(this).closest(".form");
-    $form.clearError();
+  var $form = $('.form:visible');
 
-    var $inputList = $form.find('input:visible');
-    var result = true;
-    $.each($inputList, function(index, $input) {
-      var $input = $($input);
-      if ($.trim($input.val()) === '') {
-        console.log($input)
-        result = false;
-        return false;
-      }
-    });
-
-    if (result) {
-      $form.enableNextBtn();
-    }
-  });
-
-  $('.form').on('click', '.submit-btn', function () {
-    var $form = $(this).closest(".form");
-    if ($form.validate()) {
-      console.log('yes')
-    } else {
-      console.log('no');
-    }
-  });
+  $form.handleInput();
+  $form.handleEnterKey();
+  $form.handleSubmit();
 });

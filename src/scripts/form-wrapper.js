@@ -90,5 +90,48 @@ jquery.fn.extend({
     } else {
       this.disableNextBtn();
     }
+  },
+
+  handleInput: function() {
+    var $form = this;
+    $form.on('blur input', 'input', function() {
+      var $form = $(this).closest(".form");
+      $form.clearError();
+
+      var $inputList = $form.find('input:visible');
+      var result = true;
+      $.each($inputList, function(index, $input) {
+        var $input = $($input);
+        if ($.trim($input.val()) === '') {
+          console.log($input)
+          result = false;
+          return false;
+        }
+      });
+
+      if (result) {
+        $form.enableNextBtn();
+      }
+    });
+  },
+
+  handleSubmit: function() {
+    var $form = this;
+    $form.on('click', '.submit-btn', function() {
+      if ($form.validate()) {
+        console.log('yes')
+      } else {
+        console.log('no');
+      }
+    });
+  },
+
+  handleEnterKey: function() {
+    var $form = this;
+    $(document).on('keypress', function (e) {
+      if (e.which === 13) {
+        $form.handleSubmit();
+      }
+    });
   }
 });
