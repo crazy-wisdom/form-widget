@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/form.scss";
 import "./styles/demo.scss";
 
-import "./scripts/form-validation";
-import "./scripts/form-wrapper";
+import './scripts/form-validation';
+import './scripts/form-wrapper';
 
 
 console.log("hello world!");
@@ -21,4 +21,6 @@ $(function() {
   $form.handleInput();
   $form.find('.submit-btn').handleEnterKey();
   $form.handleSubmit();
+
+
 });

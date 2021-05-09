@@ -1,9 +1,14 @@
 import $ from "jquery";
 import Cleave from 'cleave.js';
+import createStore from './store/store';
+import reducer from './store/reducer';
+
 
 var jquery = $;
 
 require('./lib/jquery.inputmask.min.js');
+
+
 
 jquery.extend({
   formatInputValue: function() {
@@ -71,6 +76,7 @@ jquery.extend({
   }
 });
 
+
 jquery.fn.extend({
   enableNextBtn: function() {
     var $button = this.find('button.disabled');
@@ -117,9 +123,18 @@ jquery.fn.extend({
 
   handleSubmit: function() {
     var $form = this;
+
+
     $form.on('click', '.submit-btn', function() {
       if ($form.validate()) {
-        console.log('yes')
+        console.log('yes');
+
+        var store = createStore(reducer);
+        store.subscribe(() => {
+          console.log(store.getState());
+        });
+
+        store.dispatch({'type': 'test1'});
       } else {
         console.log('no');
       }
